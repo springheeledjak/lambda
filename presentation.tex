@@ -1,0 +1,100 @@
+%% Preamble
+\documentclass{beamer}
+%\usepackage{fontspec}
+%\usetheme[beteckna]{Median}
+\usepackage[T1]{fontenc}
+\usepackage[black]{merriweather}
+\usepackage{sansmath}
+\usepackage{tikz}
+\usetheme{Median}
+
+%% Macros
+\renewcommand{\l}{\lambda} % We don't really care about this diacritic
+\newcommand{\aeq}{\eq_\alpha}
+\newcommand{\ato}{\to_\alpha}
+\newcommand{\beq}{\eq_\beta}
+\newcommand{\bto}{\to_\beta}
+
+%% Title and other silliness
+\title{An Introduction to the $\l$-calculus}
+\author{Toli Paine}
+\institute{Quantcast}
+\date{April 2014}
+
+\AtBeginSection {
+    \begin{frame}[plain]
+        \frametitle{\\[2em]}
+        \tableofcontents[currentsection]
+    \end{frame}
+}
+
+% We're going to want this later
+%\[
+%    y \equiv \l f.(\l x.f (x x)) (\l x.f (x x))
+%\]
+
+%% Slides
+\begin{document}
+    \frame{\titlepage}
+
+    \section{Introduction}
+    \begin{frame}
+        \frametitle{Why the $\l$-calculus?}
+        \pause
+        \begin{itemize}[<+->]
+            \setlength{\itemsep}{1.5em}
+            \item Simple, yet powerful: encompasses all of computing
+                (Turing-complete!)
+            \item Much easier to understand than Turing machines
+            \item Provides the basis of modern ``functional programming''
+                languages \\[0.25em]
+                \begin{itemize}[<+->]
+                    \item Scala, Clojure, Scheme, Haskell
+                \end{itemize}
+                \vspace{-0.5em}
+            \item Ever wondered what the hell ``Y Combinator'' actually means?
+        \end{itemize}
+    \end{frame}
+    %TODO: add pictures! Church, Turing, etc.
+    \begin{frame}
+        \frametitle{The Church-Turing Thesis}
+    \end{frame}
+    \begin{frame}
+        \frametitle{Definitions}
+    \end{frame}
+
+    \section{Boolean Logic}
+    \begin{frame}
+        \frametitle{Encoding truth values}
+    \end{frame}
+    \begin{frame}
+        \frametitle{Boolean operators}
+    \end{frame}
+
+    \section{Numbers!}
+    \begin{frame}
+        \frametitle{Church's encoding (for natural numbers)}
+    \end{frame}
+
+    \section{Data Structures}
+    \begin{frame}
+        \frametitle{Encoding linked lists}
+    \end{frame}
+
+    \section{Combinators and Recursion}
+    \begin{frame}
+        \frametitle{How do we build recursive functions?}
+    \end{frame}
+
+    \section{Conclusion}
+    \begin{frame}
+        \frametitle{Further reading}
+        \begin{itemize}
+            \setlength{\itemsep}{1.5em}
+            \item Combinatory logic
+            \item Curry-Howard isomorphism
+            \item System F
+            \item Hindley-Milner type system
+        \end{itemize}
+    \end{frame}
+\end{document}
