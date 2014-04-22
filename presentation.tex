@@ -48,6 +48,9 @@
 \newcommand{\PLUS}{\textsf{PLUS}}
 \newcommand{\MULT}{\textsf{MULT}}
 \newcommand{\EXP}{\textsf{EXP}}
+\newcommand{\ISZERO}{\textsf{ISZERO}}
+\newcommand{\PRED}{\textsf{PRED}}
+\newcommand{\FACT}{\textsf{FACT}}
 
 \newcommand{\CONS}{\textsf{CONS}}
 \newcommand{\HEAD}{\textsf{HEAD}}
@@ -56,7 +59,7 @@
 \newcommand{\ISNIL}{\textsf{ISNIL}}
 
 \newcommand{\ID}{\textsf{ID}}
-\newcommand{\Y}{\textsf{Y}}
+\newcommand{\Y}{\textbf{Y}}
 
 %% Title and other silliness
 \title{An Introduction to the $\l$-calculus}
@@ -132,7 +135,7 @@
                 }
             }
             \apause {&\scalebox{3}{$=$}}
-            \apause {&\scalebox{4}{$\l$}}
+            \apause {&\scalebox{5}{$\l$}}
         \end{align*}
     \end{frame}
 
@@ -224,7 +227,7 @@
         \pause
         \ldots{}but also pretty useful: $n \, f \, x \beq f^{n}(x)$. \\[2em]
         \pause{}
-        {\footnotesize {[NB: That $0 \aeq \FALSE$ is purely coincidental; TRUE is meaningless here.]}}
+        {\footnotesize {[NB that $0 \aeq \FALSE$ is purely coincidental; TRUE is meaningless here.]}}
     \end{frame}
 
     \begin{frame}
@@ -269,7 +272,7 @@
     \end{frame}
 
     \begin{frame}
-        \frametitle{Linked Lists!}
+        \frametitle{Lists!}
         Lots of encodings. My favorite defines $\NIL \equiv \FALSE$, which turns out to be (mostly) convenient: \\
         \begin{align*}
             \apause{%
@@ -281,7 +284,7 @@
         \end{align*}
     \end{frame}
     \begin{frame}
-        \frametitle{Linked Lists!}
+        \frametitle{Lists!}
         \vspace{1em}
         So a list ends up looking a lot like it does in many languages:
         \begin{align*}
@@ -297,7 +300,59 @@
 
     \begin{frame}
         \frametitle{How do we build recursive functions?}
-        Problem: 
+        Problem: no variable assignment -- can't name functions! \\[2em]
+        \pause
+        Loops are also out -- no concept of mutability. \\[2em]
+        \pause
+        Okay, so I lied a little\ldots
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Meet $\omega$.}
+        If you think about it, you totally \emph{can} let functions reference themselves: if we let \\
+        \[
+            \omega \equiv \lf{x}{x \, x}
+            \vspace{1em}
+        \]
+        and $f$ is any function, then voil\`{a}, $\omega f$ gives us self-application: \\[0.5em]
+        \pause
+        \[
+            \omega \, \FALSE \bto \FALSE \; \FALSE \bto \lf{x}{x}
+            \vspace{1em}
+        \]
+        \pause
+        Church et al.\ called these \emph{combinators}.
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Building a factorial function}
+        We can build a sort of ``skeleton'' of factorial:
+        \begin{align*}
+            \FACT \equiv \lf{r\,n}{\IF} \;  & (\ISZERO \, n) \\
+                                            & 1 \\
+                                            & (\MULT \, n \, (r \, r \, (\PRED \, n)))
+        \end{align*}
+        \pause
+        \ldots{}but we can't really \emph{use} it yet; we need to get rid of that pesky $r$. \\[1em]
+        \pause
+        To do so, we need to find the \textbf{fixed point} of FACT.
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Meet $\omega$'s more powerful sibling.}
+        \vspace{2em}
+        Enter the fabled Y combinator:
+        \[
+            \Y \equiv \lf{f}{(\lf{x}{f \, (x \, x)}) \, (\lf{x}{f \, (x \, x)})}
+        \]
+        $\Y$ is a ``fixed point'' combinator: it finds a fixed point of any input function. \\[1em]
+        \pause
+        We can apply this to FACT to get a fixed point, and thus our factorial function:
+        \begin{align*}
+            \Y \, \FACT \, 4 & \bto \FACT \, (\Y \, \FACT) \, 4 \\
+                             & \bto \MULT \, 4 \, (\FACT \, (\Y \, \FACT) \, 3) \\
+                             & \bto \cdots \bto 24 \\
+        \end{align*}
     \end{frame}
 
     \begin{blankframe}
