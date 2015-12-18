@@ -60,12 +60,13 @@
 
 \newcommand{\ID}{\textsf{ID}}
 \newcommand{\Y}{\textbf{Y}}
+\newdateformat{monthyear}{\shortmonthname[\THEMONTH] \THEYEAR}
 
 %% Title and other silliness
 \title{An Introduction to the $\l$-calculus}
 \author{Toli Paine}
 \institute{Quantcast}
-\date{April 2014}
+\date{\monthyear\today}
 
 \AtBeginSection {%
     \begin{frame}[plain]
@@ -101,7 +102,6 @@
             \item Ever wonder what the hell ``Y Combinator'' actually means?
         \end{itemize}
     \end{frame}
-    %TODO: add pictures! Church, Turing, etc.
 
     \section{Background}
     \begin{blankframe}
@@ -369,10 +369,10 @@
         \frametitle{Further reading}
         \begin{itemize}
             \setlength{\itemsep}{1.5em}
-            \item Combinatory logic
-            \item Curry-Howard isomorphism
-            \item System F
-            \item Hindley-Milner type system
+            \item Combinatory logic (Schönfinkel 1924, Curry 1927)
+            \item Curry-Howard isomorphism (Curry 1958, Howard 1969)
+            \item System F (Girard 1972, Reynolds 1974)
+            \item Hindley-Milner type system (Hindley 1969, Milner 1978, Damas \& Milner 1982)
         \end{itemize}
     \end{frame}
 
